@@ -1,0 +1,71 @@
+package vasanth;
+import java.util.*;
+class Sort<T>
+{
+public void Arrange(T[] arr)
+{
+Arrays.sort(arr);
+}
+public void Display(T[] arr) {
+System.out.println("Data in Array:");
+for (T element : arr) {
+System.out.println(element);
+}
+}
+}
+class SortArr
+{
+public static void main(String[] args)
+{
+Scanner scanner = new Scanner(System.in);
+int choice;
+do
+{
+System.out.println("\nMenu:");
+System.out.println("1. Sort String Array");
+System.out.println("2. Sort Integer Array");
+System.out.println("3. Sort Double Array");
+System.out.println("4. Exit");
+System.out.print("Enter your choice: ");
+choice = scanner.nextInt();
+switch (choice) {
+case 1:
+System.out.println("Enter the size of the string array:");
+int n1 = scanner.nextInt();
+String[] SA = new String[n1];
+System.out.println("Enter " + n1 + " strings:");
+for (int i = 0; i < n1; i++) {
+SA[i] = scanner.next();
+}
+Sort<String> s = new Sort<>();
+s.Arrange(SA);
+s.Display(SA);
+break;
+case 2:
+System.out.println("Enter the size of the integer array:");
+int n2 = scanner.nextInt();
+Integer[] IA = new Integer[n2];
+System.out.println("Enter " + n2 + " integers:");
+for (int i = 0; i < n2; i++) {
+IA[i] = scanner.nextInt();
+}
+Sort<Integer> is = new Sort<>();
+is.Arrange(IA);
+is.Display(IA);
+break;
+case 3:
+System.out.println("Enter the size of the double array:");
+int n3 = scanner.nextInt();
+Double[] DA = new Double[n3];
+System.out.println("Enter " + n3 + " doubles:");
+for (int i = 0; i < n3; i++) {
+DA[i] = scanner.nextDouble();
+}
+Sort<Double> d = new Sort<>();
+d.Arrange(DA);
+d.Display(DA);
+break;
+}
+}while(choice !=4);
+}
+}
