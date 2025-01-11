@@ -1,0 +1,63 @@
+package VasanthKumar;
+import java.util.Random;
+class Thread1 extends Thread {
+public void run() {
+for(int i=0;i<10;i++){
+Random r = new Random();
+int n = r.nextInt(70);
+if (n % 2 == 0) {
+synchronized (Thread2.class) {
+Thread2.number = n;
+Thread2.class.notify();
+}
+} else {
+synchronized (Thread3.class) {
+Thread3.number = n;
+Thread3.class.notify();
+}
+}
+try {
+Thread.sleep(1000);
+} catch (InterruptedException e) {
+}
+}
+}
+}
+class Thread2 extends Thread {
+static int number;
+public void run() {
+while(true) {
+synchronized (Thread2.class) {
+try {
+Thread2.class.wait();
+System.out.println("Square of even number " + (number) + " is: " + (number * number));
+} catch (InterruptedException e) {
+}
+}
+}
+}
+}
+class Thread3 extends Thread {
+static int number;
+public void run() {
+while (true) {
+synchronized (Thread3.class) {
+try {
+Thread3.class.wait();
+System.out.println("Cube of odd number " + (number) + " is: " + (number * number * number));
+} catch (InterruptedException e) {
+}
+}
+}
+}
+}
+public class Main {
+public static void main(String[] args) throws InterruptedException {
+Thread1 t1 = new Thread1();
+Thread2 t2 = new Thread2();
+Thread3 t3 = new Thread3();
+t1.start();
+t2.start();
+t3.start();
+}
+}
