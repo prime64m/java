@@ -1,0 +1,68 @@
+package VasanthKumar;
+import java.util.*;
+interface Encryption {
+String message = "";
+void encrypt();
+}
+class NextChar implements Encryption {
+String message = "";
+NextChar(String message) {
+this.message = message;
+}
+public void encrypt() {
+String result = "";
+int i = 0, j = message.length();
+while (i < j) {
+char c = message.charAt(i);
+if (Character.isLetter(c)) {
+if (c == 'z') c = 'a';
+else if (c == 'Z') c = 'A';
+else c++;
+} else if (Character.isDigit(c)) {
+if (c == '9') c = '0';
+else c++;
+}
+result += c;
+i++;
+}
+System.out.println("Encrypted Message= " + result);
+}
+}
+class PrevChar implements Encryption {
+String message = "";
+Page 27 of 46
+PrevChar(String message) {
+this.message = message;
+}
+public void encrypt() {
+String result = "";
+int i = 0, j = message.length();
+while (i < j) {
+char c = message.charAt(i);
+if (Character.isLetter(c)) {
+if (c == 'a') c = 'z';
+else if (c == 'A') c = 'Z';
+else c--;
+} else if (Character.isDigit(c)) {
+if (c == '0') c = '9';
+else c--;
+}
+result += c;
+i++;
+}
+System.out.println("Encrypted Message= " + result);
+}
+}
+class CharEncrypt {
+public static void main(String[] args) {
+Scanner in = new Scanner(System.in);
+System.out.println("Enter the message to encrypt next character: ");
+String message1 = in.nextLine();
+NextChar n = new NextChar(message1);
+n.encrypt();
+System.out.println("Enter the message to encrypt previous character: ");
+String message2 = in.nextLine();
+PrevChar p = new PrevChar(message2);
+p.encrypt();
+}
+}
