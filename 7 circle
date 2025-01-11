@@ -1,0 +1,67 @@
+package VasanthKumar;
+import java.util.Scanner;
+class Circle {
+double radius;
+char color;
+public Circle(double radius) {
+this.radius = radius;
+}
+public Circle(double radius, char color) {
+this.radius = radius;
+this.color = color;
+}
+public double getRadius() {
+return radius;
+}
+public double getArea() {
+return Math.PI * radius * radius;
+}
+}
+class Cylinder extends Circle {
+double height;
+public Cylinder(double height) {
+super(1.0);
+this.height = height;
+}
+public Cylinder(double height, double radius) {
+this(height);
+this.radius = radius;
+}
+public Cylinder(double height, double radius, char color) {
+this(height, radius);
+this.color = color;
+}
+public double getHeight() {
+return height;
+}
+public double getVolume() {
+return getArea() * getHeight();
+}
+public double getArea() {
+return 2 * super.getArea() + 2 * Math.PI * getRadius() * getHeight();
+}
+}
+class Shape {
+public static void main(String[] args) {
+Scanner scanner = new Scanner(System.in);
+System.out.println("Enter the radius of cylinder 1:");
+double radius1 = scanner.nextDouble();
+System.out.println("Enter the height of cylinder 1:");
+double height1 = scanner.nextDouble();
+System.out.println("Enter the color of cylinder 1:");
+char color1 = scanner.next().charAt(0);
+System.out.println("Enter the radius of cylinder 2:");
+double radius2 = scanner.nextDouble();
+System.out.println("Enter the height of cylinder 2:");
+double height2 = scanner.nextDouble();
+System.out.println("Enter the color of cylinder 2:");
+char color2 = scanner.next().charAt(0);
+Cylinder cylinder1 = new Cylinder(height1, radius1, color1);
+Cylinder cylinder2 = new Cylinder(height2, radius2, color2);
+if (cylinder1.getArea() == cylinder2.getArea() && cylinder1.getVolume() == cylinder2.getVolume() && cylinder1.color == cylinder2.color) {
+System.out.println("The cylinders are similar.");
+} else {
+System.out.println("The cylinders are not similar.");
+}
+}
+}
