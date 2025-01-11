@@ -1,0 +1,94 @@
+//1St File Name : Student.javaInternals.java & package CIE
+package CIE;
+import java.util.*;
+public class Student {
+public Object readD;
+String USN;
+String Name;
+int Sem;
+Scanner in=new Scanner(System.in);
+public void readD()
+{
+System.out.println("Enter the NAME , USN and Sem of the student: ");
+this.Name=in.nextLine();
+this.USN=in.nextLine();
+this.Sem=in.nextInt();
+}
+public void dispalyD()
+{
+System.out.println("Name : "+this.Name);
+System.out.println("USN : "+this.USN);
+System.out.println("Sem : "+this.Sem);
+}
+}
+//2nd File Name : Internals.java & package CIE
+package CIE;
+import java.util.Scanner;
+public class Internals
+{
+Scanner in = new Scanner(System.in);
+public int[] C = new int[20];
+public void readC()
+{
+for (int i = 0; i < 6; i++)
+{
+System.out.println("Enter the CIE marks obtained by the student in Course -: " + (i + 1));
+this.C[i] = in.nextInt();
+}
+}
+}
+//3rd File Name : External.java & package SEE
+package SEE;
+import CIE.*;
+import java.util.Scanner;
+public class External extends Student {
+Scanner in = new Scanner(System.in);
+public int[] S = new int[20];
+public void readS() {
+for (int i = 0; i < 6; i++) {
+System.out.println("Enter the SEE marks obtained by the student in Course - " + (i + 1)+":");
+this.S[i] = in.nextInt();
+}
+}
+}
+//4th File Name : TotalResult.java & package VasanthKumar
+Package VasanthKumar;
+import CIE.*;
+import SEE.*;
+import java.util.Scanner;
+public class TotalResult {
+public static void main(String[] args) {
+Scanner in = new Scanner(System.in);
+System.out.println("Enter The Count of students: ");
+int N =in.nextInt();
+Student[] s = new Student[N];
+Internals[] i = new Internals[N];
+External[] e = new External[N];
+int[] Total = new int[N];
+int[][] Marks = new int[N][6];
+for (int j = 0; j < N; j++) {
+s[j] = new Student();
+s[j].readD();
+i[j] = new Internals();
+i[j].readC();
+e[j] = new External();
+e[j].readS();
+Total[j] = 0;
+for (int k = 0; k < 6; k++) {
+Marks[j][k] = (i[j].C[k] + (e[j].S[k]) / 2);
+Total[j] += Marks[j][k];
+}
+}
+for (int j = 0; j < N; j++) {
+System.out.println("\n------------------------------- ");
+System.out.println("Details of Student " + (j + 1));
+s[j].dispalyD();
+System.out.println("final marks Obtained in :" );
+for(int m=0;m<6;m++)
+System.out.println("Course-"+(m+1) +" = " +Marks[j][m]);
+System.out.println("------------------------------- ");
+System.out.println("Total Marks = " + Total[j]);
+System.out.println("------------------------------- ");
+}
+}
+}
